@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    letter-spacing: 0.1rem;
+    font-family: 'Yusei Magic', sans-serif;
+}
+
+:root {
+    --circle: '\f111';
+    --cross: '\f00d';
+
+    --icon-color: rgb(150, 150, 150);
+}
+
+html,
+body,
+main {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: seashell;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 0.75rem;
+}
+
+.container div {
+    width: 125px;
+    height: 125px;
+    background-color: #78bec5;
+    border-radius: 12.5px;
+    /* position: relative; */
+    cursor: pointer;
+    transition: all 250ms ease-in-out;
+}
+
+.container div:hover {
+    background-color: #3d4250;
+}
+
+.container div::before {
+    width: 100%;
+    height: 100%;
+    color: var(--icon-color);
+    font-family: 'Font Awesome 5 Free';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: absolute; */
+}
+
+/* if player is circle */
+
+[data-player="circle"] div:not([data-played-by]):hover::before,
+.container[data-player] [data-played-by="circle"]::before {
+    content: var(--circle);
+    font-size: 2.9rem;
+
+    /* property text-stroke to increase font weight */
+    -webkit-text-stroke: 5px currentColor;
+}
+
+/* if playes is cross */
+
+[data-player="cross"] div:not([data-played-by]):hover::before,
+.container[data-player] [data-played-by="cross"]::before{
+    content: var(--cross);
+    font-size: 3.5rem;
+    font-weight: 900;
+}
+
+/* Squares that are already played */
+
+.container[data-player] [data-played-by] {
+    cursor: not-allowed;
+}
+
+.container[data-player] [data-played-by="circle"] {
+    background-color: #dc685a;
+}
+
+.container[data-player] [data-played-by="circle"]::before {
+    text-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
+}
+
+.container[data-player] [data-played-by="circle"]::before,
+.container[data-player] [data-played-by="cross"]::before {
+    color: white;
+}
+
+.container[data-player] [data-played-by="cross"] {
+    background-color: #ecaf4f;
+}
+
+.container[data-player] [data-played-by="cross"]::before {
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Result */
+
+#resultContainer {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#resultContainer.show {
+    display: flex;
+}
+
+.resultText {
+    margin-bottom: 0.5rem;
+    color: seashell;
+    font-size: 4rem;
+}
+
+#reset {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    background-color: snow;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 900;
+    outline: none;
+    cursor: pointer;
+    transition: all 250ms ease;
+}
+
+#reset:hover {
+    transform: scale(1.1);
+}
