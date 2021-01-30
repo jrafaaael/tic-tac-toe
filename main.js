@@ -1,7 +1,7 @@
 const board = document.querySelector('.container');
 const cells = board.querySelectorAll('div');
 const resultContainer = document.getElementById('resultContainer');
-const reset = document.getElementById('reset');
+const newGame = document.getElementById('newGame');
 const winningCombinations = [
     [0, 1, 2],
     [3, 4, 5],
@@ -21,6 +21,9 @@ const startGame = () => {
     });
     resultContainer.classList.remove('show');
     board.dataset.player = 'cross';
+
+    printScore('cross');
+    printScore('circle');
 }
 
 const checkWin = (player) => {
@@ -37,11 +40,34 @@ const isDraw = () => {
     })
 }
 
+const getLocalStorage = (prop) => {
+    return localStorage.hasOwnProperty(prop) ? JSON.parse(localStorage.getItem(prop)) : {cross: 0, circle: 0};
+}
+
+const updateScore = (player) => {
+    const score = getLocalStorage('score');
+
+    score[player]++;
+
+    localStorage.setItem('score', JSON.stringify(score));
+}
+
+const printScore = (player) => {
+    const winnerPlayer = document.querySelector(`[data-${player}] span`);
+    const score = getLocalStorage('score');
+
+    winnerPlayer.textContent = score[player];
+}
+
 const setResult = (draw, player = '') => {
     const resultText = resultContainer.querySelector('.resultText');
 
-    if (draw) resultText.textContent = 'Draw';
-    else resultText.textContent = player + ' Win!';
+    if (draw) resultText.textContent = 'Draw!';
+    else {
+        updateScore(player);
+        printScore(player);
+        resultText.textContent = player + ' Win!';
+    }
 
     resultContainer.classList.add('show');
 }
@@ -61,10 +87,10 @@ board.addEventListener('click', e => {
 
     board.dataset.player = (player === 'cross') ? 'circle' : 'cross';
 
-    if (checkWin(player)) setResult(false, player[0].toUpperCase() + player.slice(1));
+    if (checkWin(player)) setResult(false, player);
     else if (isDraw()) setResult(true)
 }, false);
 
-reset.addEventListener('click', startGame, false);
+newGame.addEventListener('click', startGame, false);
 
 startGame();
