@@ -1,4 +1,5 @@
-const board = document.querySelector('.container');
+const reset = document.getElementById('resetBtn');
+const board = document.querySelector('.board');
 const cells = board.querySelectorAll('div');
 const resultContainer = document.getElementById('resultContainer');
 const newGame = document.getElementById('newGame');
@@ -89,6 +90,11 @@ board.addEventListener('click', e => {
 
     if (checkWin(player)) setResult(false, player);
     else if (isDraw()) setResult(true)
+}, false);
+
+reset.addEventListener('click', () => {
+    localStorage.clear();
+    startGame();
 }, false);
 
 newGame.addEventListener('click', startGame, false);

@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
 </head>
+
 <body>
     <main>
         <section class="score">
             <h2 class="scoreTitle">Score</h2>
-            <div class="scoreContainer">
-                <h5 class="crossScore" data-cross>Cross: <span></span></h5>
-                <h5 class="circleScore" data-circle>Circle: <span></span></h5>
+            <div class="container">
+                <h5 data-cross>Cross: <span></span></h5>
+                <button id="resetBtn">
+                    <span>Reset</span>
+                    <div></div>
+                </button>
+                <h5 data-circle>Circle: <span></span></h5>
             </div>
         </section>
-        <section class="container">
+        <section class="board">
             <div></div>
             <div></div>
             <div></div>
@@ -34,4 +40,5 @@
     </main>
     <script src="./main.js"></script>
 </body>
+
 </html>
