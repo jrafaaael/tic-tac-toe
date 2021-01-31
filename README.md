@@ -12,6 +12,8 @@ See the game in action here https://jrafaaael.github.io/Tic-Tac-Toe/
 
 1.2) **Enhancement and addition of styles:** The button appearance to start a new game has been improved. Added styles for player scoring section.
 
+2.1) **Added a button to reset the score**.
+
 # 
 
 Special thanks to Font Awesome for the icons.
