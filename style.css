@@ -42,41 +42,97 @@ main {
 }
 
 .scoreTitle {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.7rem;
     font-size: 2.5rem;
     text-align: center;
 }
 
-.scoreContainer {
+.container {
     width: calc((125px * 3) + (0.75rem * 2));
+    height: fit-content;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
-.scoreContainer * {
+.container h5 {
+    font-size: 1.25rem;
+    text-shadow: 1px 1px rgba(51, 51, 51, 0.5);
+}
+
+#resetBtn {
+    background-color: #343a40;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 2px 4px rgba(51, 51, 51, 0.5);
+    line-height: 1;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+}
+
+#resetBtn div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 5px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    transition: transform 250ms ease;
+}
+
+#resetBtn span {
+    padding: 0.55rem 0.9rem;
+    display: inline-block;
+    color: snow;
     font-size: 1.25rem;
 }
 
-.container {
+#resetBtn:hover {
+    box-shadow: none;
+}
+
+#resetBtn:hover div {
+    background-image: linear-gradient(
+        90deg,
+        #00c0ff 0%,
+        #ffcf00 49%,
+        #fc4f4f 80%,
+        #00c0ff 100%
+    );
+    box-shadow: 1px 2px 4px rgba(51, 51, 51, 0.5);
+    transform: scaleX(1.1) scaleY(1.15);
+    animation: slidebg 5s 275ms linear infinite;
+}
+
+@keyframes slidebg {
+    to {
+        background-position: 20vw;
+    }
+}
+
+.board {
     display: grid;
     grid-template-columns: repeat(3, auto);
     grid-gap: 0.75rem;
 }
 
-.container div {
+.board div {
     width: 125px;
     height: 125px;
     background-color: #78bec5;
     border-radius: 12.5px;
     cursor: pointer;
-    /* transition: all 100ms ease-in-out; */
 }
 
-.container div:hover {
+.board div:hover {
     background-color: #3d4250;
 }
 
-.container div::before {
+.board div::before {
     width: 100%;
     height: 100%;
     color: var(--icon-color);
@@ -89,7 +145,7 @@ main {
 /* if player is circle */
 
 [data-player="circle"] div:not([data-played-by]):hover::before,
-.container[data-player] [data-played-by="circle"]::before {
+.board[data-player] [data-played-by="circle"]::before {
     content: var(--circle);
     font-size: 2.9rem;
 
@@ -100,7 +156,7 @@ main {
 /* if playes is cross */
 
 [data-player="cross"] div:not([data-played-by]):hover::before,
-.container[data-player] [data-played-by="cross"]::before {
+.board[data-player] [data-played-by="cross"]::before {
     content: var(--cross);
     font-size: 3.5rem;
     font-weight: 900;
@@ -108,28 +164,28 @@ main {
 
 /* Squares that are already played */
 
-.container[data-player] [data-played-by] {
+.board[data-player] [data-played-by] {
     cursor: not-allowed;
 }
 
-.container[data-player] [data-played-by="circle"] {
+.board[data-player] [data-played-by="circle"] {
     background-color: var(--circle-color);
 }
 
-.container[data-player] [data-played-by="circle"]::before {
+.board[data-player] [data-played-by="circle"]::before {
     text-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
 }
 
-.container[data-player] [data-played-by="circle"]::before,
-.container[data-player] [data-played-by="cross"]::before {
+.board[data-player] [data-played-by="circle"]::before,
+.board[data-player] [data-played-by="cross"]::before {
     color: white;
 }
 
-.container[data-player] [data-played-by="cross"] {
+.board[data-player] [data-played-by="cross"] {
     background-color: var(--cross-color);
 }
 
-.container[data-player] [data-played-by="cross"]::before {
+.board[data-player] [data-played-by="cross"]::before {
     text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
